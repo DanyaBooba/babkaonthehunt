@@ -1267,7 +1267,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_TargetDisplay: 0
 --- !u!114 &7720920472260678896
 MonoBehaviour:
@@ -2381,8 +2381,8 @@ GameObject:
   - component: {fileID: 9120735541081393711}
   - component: {fileID: 9120735541081393712}
   - component: {fileID: 7441508939988867074}
-  - component: {fileID: 7199695564057434546}
   - component: {fileID: 3051569464159423134}
+  - component: {fileID: 7199695564057434546}
   m_Layer: 8
   m_Name: camera
   m_TagString: MainCamera
@@ -2513,6 +2513,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a695a90e0c43d7b47b39579e2051bd4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3051569464159423134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120735541081393717}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d107f9976f03ce46b7b5bd2597aaa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background:
+  - {fileID: 8300000, guid: 791d01efe8e6c214f977b2c210db8592, type: 3}
 --- !u!82 &7199695564057434546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2609,20 +2623,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3051569464159423134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120735541081393717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d107f9976f03ce46b7b5bd2597aaa1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background:
-  - {fileID: 8300000, guid: 791d01efe8e6c214f977b2c210db8592, type: 3}
 --- !u!1 &9120735541193357552
 GameObject:
   m_ObjectHideFlags: 0
