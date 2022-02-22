@@ -11,6 +11,8 @@ public class Touch : MonoBehaviour
     private FinishButton endGame;
     private BabkaTextUI textUI;
 
+    private PlatformJumpDown platformDown;
+    
     private void Start()
     {
         health = GetComponent<Health>();
@@ -33,6 +35,16 @@ public class Touch : MonoBehaviour
                 health.GetDamage(enemyDamage);
                 enemy.Damage(attack.ReturnDamage());
             }
+        }
+
+        if (collision.gameObject.GetComponent<PlatformJumpDown>())
+        {
+            if(platformDown == null)
+                platformDown = collision.gameObject.GetComponent<PlatformJumpDown>();
+        }
+        else
+        {
+            platformDown = null;
         }
     }
 
@@ -105,5 +117,14 @@ public class Touch : MonoBehaviour
         {
             textUI.ClearText();
         }
+    }
+    
+    //Help methods
+    //
+
+    public void GetPlatformDown()
+    {
+        if(platformDown != null)
+            platformDown.StartOffCollider();
     }
 }

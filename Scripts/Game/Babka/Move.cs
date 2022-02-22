@@ -26,13 +26,14 @@ public class Move : MonoBehaviour
     public GameObject jumpButton;
     public Joystick joystick;
 
+    private Touch touch;
     private Platform platform;
 
     private Rigidbody2D rb;
 
     private float speed = 6.5f;
     private float factorValue = 2f;
-    private float jumpForce = 9f;
+    private float jumpForce = 12f;
 
     private float moveInput;
     private float flipValue;
@@ -52,6 +53,7 @@ public class Move : MonoBehaviour
         platform = GetComponent<Platform>();
         health = GetComponent<Health>();
         imageBabka = GetComponent<ImageBabka>();
+        touch = GetComponent<Touch>();
 
         gravityScale = rb.gravityScale;
 
@@ -148,6 +150,9 @@ public class Move : MonoBehaviour
 
         if(transform.position.y < -25f)
             GetComponent<LoadLevel>().ReloadLevel();
+        
+        if(GetPlayerDown())
+            touch.GetPlatformDown();
     }
 
     private void Jump()
@@ -219,5 +224,15 @@ public class Move : MonoBehaviour
     {
         joystickObject.SetActive(active);
         jumpButton.SetActive(active);
+    }
+
+    private bool GetPlayerDown()
+    {
+        if (platform.isAndroid())
+            return joystick.Vertical <= -.9f;
+        else
+            return Input.GetKeyDown(KeyCode.S);
+        
+        return false;
     }
 }

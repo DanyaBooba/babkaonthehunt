@@ -10,6 +10,8 @@ public class Hill : MonoBehaviour
     private SpriteRenderer sprite;
     private CapsuleCollider2D collider;
 
+    private HillMoveUpDown moveUpDown;
+
     private float transperent = 1f;
     private float speed = 1.2f;
     private bool pick;
@@ -21,6 +23,9 @@ public class Hill : MonoBehaviour
 
         collider.enabled = true;
         sprite.color = ColorTransperent(1f);
+
+        if(GetComponent<HillMoveUpDown>())
+            moveUpDown = GetComponent<HillMoveUpDown>();
     }
 
     public float ReturnHill()
@@ -52,6 +57,7 @@ public class Hill : MonoBehaviour
             }
             else
             {
+                moveUpDown.GetDestory();
                 Destroy(gameObject);
             }
         }

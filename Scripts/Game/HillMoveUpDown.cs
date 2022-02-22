@@ -6,7 +6,7 @@ using UnityEngine;
 public class HillMoveUpDown : MonoBehaviour
 {
     [SerializeField] private GameObject prefabDot;
-    private Transform[] points;
+    private GameObject[] pointsObj;
 
     private int number;
     private float waitTime;
@@ -16,23 +16,31 @@ public class HillMoveUpDown : MonoBehaviour
     private float upside = .4f;
 
     private Vector2 position;
+    private bool dead;
     
     private void Start()
     {
-        points = new Transform[2];
+        pointsObj = new GameObject[2];
         position = transform.position;
 
-        points[0] = Instantiate(prefabDot, new Vector2(position.x, position.y + upside), Quaternion.identity).GetComponent<Transform>();
-        points[1] = Instantiate(prefabDot, new Vector2(position.x, position.y - upside), Quaternion.identity).GetComponent<Transform>();
+        pointsObj[0] = Instantiate(prefabDot, new Vector2(position.x, position.y + upside), Quaternion.identity);
+        pointsObj[1] = Instantiate(prefabDot, new Vector2(position.x, position.y - upside), Quaternion.identity);
 
-        int random = UnityEngine.Random.Range(0, points.Length);
-        transform.position = points[random].position;
+        int random = UnityEngine.Random.Range(0, pointsObj.Length);
+        transform.position = pointsObj[random].transform.position;
         waitTime = waitTimeValue;
+    }
+
+    public void GetDestory()
+    {
+        dead = true;
+        Destroy(pointsObj[0]);
+        Destroy(pointsObj[1]);
     }
 
     private void FixedUpdate()
     {
-        if (points.Length <= 0) return;
+        if (pointsObj.Length <= 0 || dead) return;
         
         transform.position = VectorMoveTowards();
 
@@ -47,13 +55,13 @@ public class HillMoveUpDown : MonoBehaviour
 
     private float VectorDistance()
     {
-        float vector = Vector3.Distance(transform.position, points[number].position);
+        float vector = Vector3.Distance(transform.position, pointsObj[number].transform.position);
         return vector;
     }
 
     private Vector3 VectorMoveTowards()
     {
-        Vector3 vector = Vector3.MoveTowards(transform.position, points[number].position, speed * Time.deltaTime);
+        Vector3 vector = Vector3.MoveTowards(transform.position, pointsObj[number].transform.position, speed * Time.deltaTime);
         return vector;
     }
 
@@ -62,7 +70,7 @@ public class HillMoveUpDown : MonoBehaviour
         waitTime = waitTimeValue;
 
         number++;
-        if (number >= points.Length)
+        if (number >= pointsObj.Length)
             number = 0;
     }
 }
