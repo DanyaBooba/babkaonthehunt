@@ -30,7 +30,8 @@ public class SetPause : MonoBehaviour
 
     public void PausePublic()
     {
-        Pause();
+        if(platform.isAndroid())
+            Pause();
     }
 
     public void SetTimeTrue()
