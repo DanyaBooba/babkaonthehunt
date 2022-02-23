@@ -1,15 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Platform : MonoBehaviour
 {
+    private InputControll controll; 
     private int mobile__pc__editor = -1;
 
     private void Start()
     {
         mobile__pc__editor = PlatformSet();
         Debug.Log(WhatPlatform(mobile__pc__editor));
+    }
+
+    private void Awake()
+    {
+        controll = new InputControll();
+
+        controll.Controll.debugChangePlatform.performed += context => NextPlatform();
+    }
+
+    private void OnEnable()
+    {
+        controll.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controll.Disable();
     }
 
     public int ReturnPlatform()
@@ -45,15 +65,10 @@ public class Platform : MonoBehaviour
         return mobile__pc__editor == 3;
     }
 
-
-    private void Update()
+    private void NextPlatform()
     {
-        //debug
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            mobile__pc__editor = Next(mobile__pc__editor, 3);
-            Debug.Log(WhatPlatform(mobile__pc__editor));
-        }
+        mobile__pc__editor = Next(mobile__pc__editor, 3);
+        Debug.Log(WhatPlatform(mobile__pc__editor));
     }
 
     private int PlatformSet()

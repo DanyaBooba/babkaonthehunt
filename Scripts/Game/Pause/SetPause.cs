@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SetPause : MonoBehaviour
 {
+    private InputControll controll;
+    
     private Pause pause;
     private Platform platform;
 
@@ -17,15 +21,27 @@ public class SetPause : MonoBehaviour
         PauseOff();
     }
 
-    private void Update()
+    private void Awake()
     {
-        if(platform.isAndroid() == false)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Pause();
-            }
-        }
+        controll = new InputControll();
+
+        controll.Controll.PauseEscape.performed += context => OpenMenuPC();
+    }
+
+    private void OnEnable()
+    {
+        controll.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controll.Disable();
+    }
+
+    private void OpenMenuPC()
+    {
+        if(!platform.isAndroid())
+            Pause();
     }
 
     public void PausePublic()

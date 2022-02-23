@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class Touch : MonoBehaviour
         finish = GetComponent<FinishButton>();
         textUI = GetComponent<BabkaTextUI>();
     }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("[Tag Collision] " + collision.gameObject.tag);

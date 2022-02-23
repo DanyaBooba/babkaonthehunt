@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Move : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Move : MonoBehaviour
     private float heightJump = 1f;
 
     [Header("”правление")]
+    private InputControll controll;
     public GameObject joystickObject;
     public GameObject jumpButton;
     public Joystick joystick;
@@ -59,6 +61,24 @@ public class Move : MonoBehaviour
 
         if (space == true)
             InSpace();
+    }
+    
+    private void Awake()
+    {
+        controll = new InputControll();
+        
+        //Jump
+        controll.Controll.Jump.performed += context => Jump();
+    }
+
+    private void OnEnable()
+    {
+        controll.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controll.Disable();
     }
 
     public void JumpPublic()
@@ -102,10 +122,15 @@ public class Move : MonoBehaviour
                 if (deadFromTop)
                     health.GetDeath();
 
-                if (Input.GetKey(KeyCode.LeftShift))
+                /*if (Input.GetKey(KeyCode.LeftShift))
                     run = true;
                 else
-                    run = false;
+                    run = false;*/
+
+                /*if (controll.Controll.Run.triggered)
+                    run = true;
+                else
+                    run = false;*/
             }
             else
             {
@@ -140,8 +165,8 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Jump();
+        /*if (Input.GetKeyDown(KeyCode.Space))
+            Jump();*/
 
         if (platform.isAndroid())
             SetActiveControll(true);
@@ -204,7 +229,7 @@ public class Move : MonoBehaviour
         if (platform.isAndroid())
             input = joystick.Horizontal;
         else
-            input = Input.GetAxis("Horizontal");
+            input = controll.Controll.Move.ReadValue<float>();
 
         return input;
     }
@@ -215,7 +240,7 @@ public class Move : MonoBehaviour
         if (platform.isAndroid())
             input = joystick.Vertical;
         else
-            input = Input.GetAxis("Vertical");
+            input = controll.Controll.MoveVertical.ReadValue<float>();
 
         return input;
     }
@@ -231,7 +256,7 @@ public class Move : MonoBehaviour
         if (platform.isAndroid())
             return joystick.Vertical <= -.9f;
         else
-            return Input.GetKeyDown(KeyCode.S);
+            return controll.Controll.ActionS.triggered;
         
         return false;
     }

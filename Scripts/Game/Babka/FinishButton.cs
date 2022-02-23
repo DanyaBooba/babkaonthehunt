@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FinishButton : MonoBehaviour
 {
+    private InputControll controll;
+    
     private LoadLevel level;
     private Platform platform;
     
@@ -24,6 +27,23 @@ public class FinishButton : MonoBehaviour
     
         FinishDisable();
         EndDisable();
+    }
+    
+    private void Awake()
+    {
+        controll = new InputControll();
+
+        controll.Controll.ActionE.performed += context => LoadPC();
+    }
+
+    private void OnEnable()
+    {
+        controll.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controll.Disable();
     }
 
     public void EndAnable()
@@ -83,18 +103,15 @@ public class FinishButton : MonoBehaviour
     }
     
     #if !UNITY_ANDROID
-    private void Update()
+    private void LoadPC()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (whatload == 1)
         {
-            if (whatload == 1)
-            {
-                level.LoadNext();
-            }
-            else if (whatload == 2)
-            {
-                level.LoadLevelID(0);
-            }
+            level.LoadNext();
+        }
+        else if (whatload == 2)
+        {
+            level.LoadLevelID(0);
         }
     }
     #endif
