@@ -3079,8 +3079,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b611ad7fa0852364fa5a358b243d25d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1444550656760802831, guid: de35c98a3e7f0ee408d8ba4c49e1b670, type: 3}
+  spriteHealth: {fileID: 0}
+  parentHealth: {fileID: 0}
   health: 150
+  effect: {fileID: 1444550656760802831, guid: de35c98a3e7f0ee408d8ba4c49e1b670, type: 3}
   damage: 1
 --- !u!1001 &1926545356
 PrefabInstance:
@@ -3823,11 +3825,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877847104896100377, guid: 1018de077c9acd541a0e6df5256d125d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.55
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8877847104896100377, guid: 1018de077c9acd541a0e6df5256d125d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.73
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 8877847104896100377, guid: 1018de077c9acd541a0e6df5256d125d, type: 3}
       propertyPath: m_LocalPosition.z

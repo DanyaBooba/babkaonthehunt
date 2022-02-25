@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private GameObject effect;
+    [Header("Health")]
+    [SerializeField] private GameObject spriteHealth;
+    [SerializeField] private Transform parentHealth;
     [SerializeField] private float health = 1f;
+
+    [Header("Another")]
+    [SerializeField] private GameObject effect;
     [SerializeField] private float damage = 1f;
 
     private bool dead;
@@ -15,10 +20,13 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sprite;
     private CapsuleCollider2D collider;
 
+    private GameObject[] listHealth;
+    
     private void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<CapsuleCollider2D>();
+        HealthUIInit();
     }
 
     public void Damage(float value)
@@ -34,11 +42,10 @@ public class Enemy : MonoBehaviour
     private void ChangeHealth(float value)
     {
         health += value;
-
+        HealthUIUpdate((int) health);
+            
         if(health <= 0f)
-        {
             Dead();
-        }
     }
 
     private void Dead()
@@ -47,8 +54,7 @@ public class Enemy : MonoBehaviour
         collider.enabled = false;
         Effects();
     }
-
-
+    
     private void Effects()
     {
         if (effect != null)
@@ -67,6 +73,27 @@ public class Enemy : MonoBehaviour
             else
             {
                 Destroy(gameObject);
+            }
+        }
+    }
+
+    private void HealthUIInit()
+    {
+        listHealth = new GameObject[(int) health];
+
+        for (int i = 0; i < (int) health; i++)
+        {
+            listHealth[i] = Instantiate(spriteHealth, parentHealth);
+        }
+    }
+
+    private void HealthUIUpdate(int hp)
+    {
+        for (int i = 0; i < listHealth.Length; i++)
+        {
+            if (i >= hp)
+            {
+                Destroy(listHealth[i]);
             }
         }
     }
