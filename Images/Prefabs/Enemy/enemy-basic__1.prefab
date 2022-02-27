@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6057977299255818821}
   - component: {fileID: 6057977299255818841}
+  - component: {fileID: 6057977299255818842}
+  - component: {fileID: 2145006308279508222}
   - component: {fileID: 6057977299255818840}
   - component: {fileID: 6057977299255818843}
-  - component: {fileID: 6057977299255818842}
   - component: {fileID: 2481161802287809884}
   - component: {fileID: 6222805048730538123}
   m_Layer: 0
@@ -88,6 +89,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6057977299255818842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057977299255818820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b611ad7fa0852364fa5a358b243d25d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  effect: {fileID: 1444550656760802831, guid: de35c98a3e7f0ee408d8ba4c49e1b670, type: 3}
+  damage: 1
+--- !u!114 &2145006308279508222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057977299255818820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ba7d50a86618d46bfa4d2cabb5963f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteHealth: {fileID: 1987251129808968240, guid: 93038d494d53cef4ca7221e049f32f0e, type: 3}
+  parentHealth: {fileID: 5260455897570432911}
 --- !u!50 &6057977299255818840
 Rigidbody2D:
   serializedVersion: 4
@@ -125,23 +155,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2.44, y: 3.13}
   m_Direction: 0
---- !u!114 &6057977299255818842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6057977299255818820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b611ad7fa0852364fa5a358b243d25d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteHealth: {fileID: 1987251129808968240, guid: 93038d494d53cef4ca7221e049f32f0e, type: 3}
-  parentHealth: {fileID: 5260455897570432911}
-  health: 1
-  effect: {fileID: 1444550656760802831, guid: de35c98a3e7f0ee408d8ba4c49e1b670, type: 3}
-  damage: 1
 --- !u!114 &2481161802287809884
 MonoBehaviour:
   m_ObjectHideFlags: 0

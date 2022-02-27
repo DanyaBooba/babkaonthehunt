@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d9ba7d50a86618d46bfa4d2cabb5963f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spriteHealth: {fileID: 1987251129808968240, guid: 93038d494d53cef4ca7221e049f32f0e, type: 3}
+  - parentHealth: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

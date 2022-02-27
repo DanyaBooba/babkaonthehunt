@@ -69,6 +69,7 @@ public class Move : MonoBehaviour
         
         //Jump
         controll.Controll.Jump.performed += context => Jump();
+        
     }
 
     private void OnEnable()
@@ -127,10 +128,6 @@ public class Move : MonoBehaviour
                 else
                     run = false;*/
 
-                /*if (controll.Controll.Run.triggered)
-                    run = true;
-                else
-                    run = false;*/
             }
             else
             {
@@ -167,6 +164,9 @@ public class Move : MonoBehaviour
     {
         /*if (Input.GetKeyDown(KeyCode.Space))
             Jump();*/
+        
+        if(controll.Controll.Run.triggered)
+            Debug.Log("run");
 
         if (platform.isAndroid())
             SetActiveControll(true);

@@ -338,6 +338,96 @@ public class @InputControll : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""53be03e7-2949-4a69-b5b7-565c7a2d9789"",
+            ""actions"": [
+                {
+                    ""name"": ""GoBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8344af4-49ea-47de-80d5-a17078c2eae8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""GetClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6dac4f1-a730-4db3-a414-777453f4f806"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""41358562-0e6b-481f-bff2-2515faff5b36"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GoBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb838554-762f-4955-9b3c-b19dbf35b93c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""GoBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cab052b3-1ee0-443f-a7c0-87d417d109ba"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""303005af-5910-495c-87b6-bb7bc7a0a535"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""GetClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a75abc7-0e53-4f14-a492-4cb6d0f814d0"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""GetClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c80bef10-df85-49bb-9dbd-f2ce5f34c43e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""GetClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -380,6 +470,10 @@ public class @InputControll : IInputActionCollection, IDisposable
         m_Controll_Run = m_Controll.FindAction("Run", throwIfNotFound: true);
         m_Controll_debugChangePlatform = m_Controll.FindAction("debugChangePlatform", throwIfNotFound: true);
         m_Controll_PauseEscape = m_Controll.FindAction("PauseEscape", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_GoBack = m_Menu.FindAction("GoBack", throwIfNotFound: true);
+        m_Menu_GetClick = m_Menu.FindAction("GetClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -514,6 +608,47 @@ public class @InputControll : IInputActionCollection, IDisposable
         }
     }
     public ControllActions @Controll => new ControllActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_GoBack;
+    private readonly InputAction m_Menu_GetClick;
+    public struct MenuActions
+    {
+        private @InputControll m_Wrapper;
+        public MenuActions(@InputControll wrapper) { m_Wrapper = wrapper; }
+        public InputAction @GoBack => m_Wrapper.m_Menu_GoBack;
+        public InputAction @GetClick => m_Wrapper.m_Menu_GetClick;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @GoBack.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
+                @GoBack.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
+                @GoBack.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGoBack;
+                @GetClick.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnGetClick;
+                @GetClick.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnGetClick;
+                @GetClick.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnGetClick;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @GoBack.started += instance.OnGoBack;
+                @GoBack.performed += instance.OnGoBack;
+                @GoBack.canceled += instance.OnGoBack;
+                @GetClick.started += instance.OnGetClick;
+                @GetClick.performed += instance.OnGetClick;
+                @GetClick.canceled += instance.OnGetClick;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -542,5 +677,10 @@ public class @InputControll : IInputActionCollection, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnDebugChangePlatform(InputAction.CallbackContext context);
         void OnPauseEscape(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnGoBack(InputAction.CallbackContext context);
+        void OnGetClick(InputAction.CallbackContext context);
     }
 }

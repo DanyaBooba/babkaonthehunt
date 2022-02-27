@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 4610159672764479124}
   - component: {fileID: 4610159672764479125}
   - component: {fileID: 4610159672764479122}
+  - component: {fileID: 8388878248121748157}
   - component: {fileID: 4610159672764479123}
   m_Layer: 0
   m_Name: enemyPatrulDots__4
@@ -283,11 +284,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b611ad7fa0852364fa5a358b243d25d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteHealth: {fileID: 1987251129808968240, guid: 93038d494d53cef4ca7221e049f32f0e, type: 3}
-  parentHealth: {fileID: 4233050682325589304}
   health: 1
   effect: {fileID: 1444550656760802831, guid: de35c98a3e7f0ee408d8ba4c49e1b670, type: 3}
   damage: 1
+--- !u!114 &8388878248121748157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610159672764479120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ba7d50a86618d46bfa4d2cabb5963f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteHealth: {fileID: 1987251129808968240, guid: 93038d494d53cef4ca7221e049f32f0e, type: 3}
+  parentHealth: {fileID: 8244501006184567341}
 --- !u!114 &4610159672764479123
 MonoBehaviour:
   m_ObjectHideFlags: 0

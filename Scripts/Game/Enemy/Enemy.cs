@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private EnemyHealth uiHealth;
+    
     [Header("Health")]
-    [SerializeField] private GameObject spriteHealth;
-    [SerializeField] private Transform parentHealth;
     [SerializeField] private float health = 1f;
 
     [Header("Another")]
@@ -20,13 +20,14 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sprite;
     private CapsuleCollider2D collider;
 
-    private GameObject[] listHealth;
-    
     private void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<CapsuleCollider2D>();
-        HealthUIInit();
+
+        uiHealth = GetComponent<EnemyHealth>();
+        if(uiHealth != null)
+            uiHealth.HealthUIInit((int) health);
     }
 
     public void Damage(float value)
@@ -42,10 +43,12 @@ public class Enemy : MonoBehaviour
     private void ChangeHealth(float value)
     {
         health += value;
-        HealthUIUpdate((int) health);
-            
+
         if(health <= 0f)
             Dead();
+        
+        if(uiHealth != null)
+            uiHealth.HealthUIUpdate((int) health);
     }
 
     private void Dead()
@@ -73,27 +76,6 @@ public class Enemy : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-            }
-        }
-    }
-
-    private void HealthUIInit()
-    {
-        listHealth = new GameObject[(int) health];
-
-        for (int i = 0; i < (int) health; i++)
-        {
-            listHealth[i] = Instantiate(spriteHealth, parentHealth);
-        }
-    }
-
-    private void HealthUIUpdate(int hp)
-    {
-        for (int i = 0; i < listHealth.Length; i++)
-        {
-            if (i >= hp)
-            {
-                Destroy(listHealth[i]);
             }
         }
     }
